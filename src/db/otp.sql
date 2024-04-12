@@ -1,0 +1,8 @@
+CREATE TABLE otp (
+    id BIGSERIAL PRIMARY KEY,
+    otp VARCHAR(250) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    expires_in BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
