@@ -14,10 +14,10 @@ app.use(express.json());
 
 app.use("/api/v1", router);
 
-// Set the port based on the environment
-const SERVER_PORT =
-  process.env.NODE_ENV === "production" ? process.env.PORT : 8000;
+// app.listen(PORT, "localhost", () => {
+//   console.log("Server is running at port", PORT);
+// });
 
-app.listen(SERVER_PORT, "localhost", () => {
-  console.log("Server is running at port", SERVER_PORT);
+app.listen(PORT, () => {
+  console.log("Server is running at port", PORT);
 });
