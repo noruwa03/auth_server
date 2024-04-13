@@ -19,7 +19,7 @@ const getTwitterUser = async (req, res) => {
     client_id: X_CLIENT_ID,
     code_verifier: "8KxxO-RPl0bLSxX5AWwgdiFbMnry_VOKzFeIlVA7NoA",
     redirect_uri:
-      "https://www.auth-server-3u34.onrender.com/api/v1/oauth/twitter/callback",
+      "https://auth-server-3u34.onrender.com/api/v1/oauth/twitter/callback",
     grant_type: "authorization_code",
   };
 
