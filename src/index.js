@@ -24,13 +24,15 @@ const path = require("path");
 //   })
 // );
 
-app.use(express.static("dist"));
+const baseDirectory = path.resolve(__dirname, ".");
+
+app.use(express.static(path.join(baseDirectory, "dist")));
 app.use(express.json());
 
 app.use("/api/v1", router);
 
 app.get("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.sendFile(path.join(baseDirectory, "/dist/index.html"));
 });
 
 // app.listen(PORT, "localhost", () => {
