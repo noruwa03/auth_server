@@ -54,8 +54,8 @@ const getUserDetailController = async (req, res) => {
     if (!checkDB.rows[0]) {
       const token = await createToken(data);
       userData = await pool.query(
-        "INSERT INTO users(email, verified, password, token) VALUES($1, $2, $3, $4) RETURNING *",
-        [data.email, data.email_verified, "Google", token]
+        "INSERT INTO users(email, verified, password, provider, token) VALUES($1, $2, $3, $4, $5) RETURNING *",
+        [data.email, data.email_verified, "Google", "Google", token]
       );
     } else {
       const token = await createToken(data);
