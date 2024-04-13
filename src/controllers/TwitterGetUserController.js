@@ -18,7 +18,8 @@ const getTwitterUser = async (req, res) => {
   const twitterOauthTokenParams = {
     client_id: X_CLIENT_ID,
     code_verifier: "8KxxO-RPl0bLSxX5AWwgdiFbMnry_VOKzFeIlVA7NoA",
-    redirect_uri: "http://www.localhost:8000/api/v1/oauth/twitter/callback",
+    redirect_uri:
+      "https://www.auth-server-3u34.onrender.com/api/v1/oauth/twitter/callback",
     grant_type: "authorization_code",
   };
 

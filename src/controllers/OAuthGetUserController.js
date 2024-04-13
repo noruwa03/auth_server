@@ -7,7 +7,7 @@ const { CLIENT_ID, CLIENT_SECRET } = process.env;
 const getUserDetailController = async (req, res) => {
   const access_token = req.query.code;
   try {
-    const redirectURL = "http://localhost:8000/api/v1/oauth";
+    const redirectURL = "https://auth-server-3u34.onrender.com/api/v1/oauth";
     const oAuth2Client = new OAuth2Client(
       CLIENT_ID,
       CLIENT_SECRET,

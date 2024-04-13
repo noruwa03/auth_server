@@ -50,7 +50,7 @@ const sendResendPasswordEmail = async (token, email, expiresIn) => {
     html: htmlTemplate
       .replace(
         "{{link}}",
-        `https://budgetbuddy-auth.vercel.app/reset?token=${token}&target=${email}`
+        `https://auth-server-3u34.onrender.com/reset?token=${token}&target=${email}`
       )
       .replace("{{expiresIn}}", expiresIn)
       .replace("{{date}}", date),

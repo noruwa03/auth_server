@@ -4,7 +4,8 @@ const { X_CLIENT_ID } = process.env;
 const twitterAuthController = async (_, res) => {
   const rootUrl = "https://twitter.com/i/oauth2/authorize";
   const options = {
-    redirect_uri: "http://www.localhost:8000/api/v1/oauth/twitter/callback",
+    redirect_uri:
+      "https://www.auth-server-3u34.onrender.com/api/v1/oauth/twitter/callback",
     client_id: X_CLIENT_ID,
     state: "state",
     response_type: "code",
