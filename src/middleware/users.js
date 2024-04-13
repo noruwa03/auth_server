@@ -3,7 +3,10 @@ const verifyToken = require("../utils/verifyToken");
 
 const getUsers = async (req, res) => {
   try {
-    const token = req.headers.cookie?.split("=")[1];
+    const userData = JSON.parse(req.cookies.userData);
+
+    // Extract the token property from the userData object
+    const token = userData.token;
     const check = await verifyToken(token);
     console.log(token);
 
