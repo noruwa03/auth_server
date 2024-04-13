@@ -77,7 +77,7 @@ const getUserDetailController = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24,
     });
 
-    res.redirect("http://localhost:5173");
+    res.redirect("/");
     // console.log("data", data);
   } catch (error) {
     console.log(error);

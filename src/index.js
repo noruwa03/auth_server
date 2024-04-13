@@ -7,17 +7,36 @@ const { PORT } = process.env;
 
 const app = express();
 app.use(cookieParser());
+const path = require("path");
 
-app.use(cors());
+// const whitelist = ["http://localhost:5173", "https://auth-test-n.vercel.app"];
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       if (whitelist.includes(origin) || !origin) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//   })
+// );
 
+app.use(express.static("dist"));
 app.use(express.json());
 
 app.use("/api/v1", router);
 
-// app.listen(PORT, "localhost", () => {
-//   console.log("Server is running at port", PORT);
-// });
+app.get("*", (_, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
-app.listen(PORT, () => {
+app.listen(PORT, "localhost", () => {
   console.log("Server is running at port", PORT);
 });
+
+// app.listen(PORT, () => {
+//   console.log("Server is running at port", PORT);
+// });

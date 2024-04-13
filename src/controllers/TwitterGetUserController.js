@@ -2,6 +2,7 @@ require("dotenv").config();
 const { X_CLIENT_ID, X_CLIENT_SECRET } = process.env;
 const axios = require("axios");
 const createToken = require("../utils/createToken");
+const pool = require("../db");
 
 // we need to encrypt our twitter client id and secret here in base 64 (stated in twitter documentation)
 const BasicAuthToken = Buffer.from(
@@ -42,9 +43,37 @@ const getTwitterUser = async (req, res) => {
       },
     });
 
-    const userInfo = await userData.data.data;
-    const token = await createToken(userInfo);
+    const checkDB = await pool.query(
+      "SELECT provider_id, verified FROM users WHERE provider_id = $1",
+      [userData.data.data.id]
+    );
 
+    let userInfoData = {};
+    let token = {};
+
+    if (!checkDB.rows[0]) {
+      token = await createToken(userData.data.data);
+      userInfoData = await pool.query(
+        "INSERT INTO users(name, username, verified, provider, provider_id, password, token) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+        [
+          userData.data.data.name,
+          userData.data.data.username,
+          true,
+          "Twitter",
+          userData.data.data.id,
+          "Twitter",
+          token,
+        ]
+      );
+    } else {
+      token = await createToken(userData.data.data);
+      userInfoData = await pool.query(
+        "UPDATE users SET token = $1, updated_at = NOW() WHERE provider_id = $2 RETURNING *",
+        [token, userData.data.data.id]
+      );
+    }
+
+    const userInfo = userInfoData.rows[0];
     const userDataWithToken = { userInfo, token };
     // console.log(userDataWithToken);
 
@@ -55,7 +84,7 @@ const getTwitterUser = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24,
     });
 
-    res.redirect("http://www.localhost:5173");
+    res.redirect("/");
   } catch (error) {
     console.log(error);
   }

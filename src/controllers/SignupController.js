@@ -37,8 +37,8 @@ const signupController = async (req, res) => {
         await sendEmail(email, Otp, hr);
 
         const result = await pool.query(
-          "INSERT INTO users(email, password, token) VALUES($1, $2, $3) RETURNING *",
-          [email, hashPassword, token]
+          "INSERT INTO users(email, password, provider, token) VALUES($1, $2, $3, $4) RETURNING *",
+          [email, hashPassword, "Local", token]
         );
 
         const userInfo = result.rows[0];
