@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { X_CLIENT_ID, X_CLIENT_SECRET } = process.env;
+const { X_CLIENT_ID, X_CLIENT_SECRET, X_CALLBACK_URL } = process.env;
 const axios = require("axios");
 const createToken = require("../utils/createToken");
 const pool = require("../db");
@@ -18,8 +18,7 @@ const getTwitterUser = async (req, res) => {
   const twitterOauthTokenParams = {
     client_id: X_CLIENT_ID,
     code_verifier: "8KxxO-RPl0bLSxX5AWwgdiFbMnry_VOKzFeIlVA7NoA",
-    redirect_uri:
-      "https://auth-server-3u34.onrender.com/api/v1/oauth/twitter/callback",
+    redirect_uri: X_CALLBACK_URL,
     grant_type: "authorization_code",
   };
 

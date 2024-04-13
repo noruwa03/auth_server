@@ -2,12 +2,12 @@ const { OAuth2Client } = require("google-auth-library");
 require("dotenv").config();
 const pool = require("../db");
 const createToken = require("../utils/createToken");
-const { CLIENT_ID, CLIENT_SECRET } = process.env;
+const { CLIENT_ID, CLIENT_SECRET, GOOGLE_CALLBACK_URL } = process.env;
 
 const getUserDetailController = async (req, res) => {
   const access_token = req.query.code;
   try {
-    const redirectURL = "https://auth-server-3u34.onrender.com/api/v1/oauth";
+    const redirectURL = GOOGLE_CALLBACK_URL;
     const oAuth2Client = new OAuth2Client(
       CLIENT_ID,
       CLIENT_SECRET,

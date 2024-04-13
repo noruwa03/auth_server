@@ -1,11 +1,10 @@
 require("dotenv").config();
-const { X_CLIENT_ID } = process.env;
+const { X_CLIENT_ID, X_CALLBACK_URL } = process.env;
 
 const twitterAuthController = async (_, res) => {
   const rootUrl = "https://twitter.com/i/oauth2/authorize";
   const options = {
-    redirect_uri:
-      "https://auth-server-3u34.onrender.com/api/v1/oauth/twitter/callback",
+    redirect_uri: X_CALLBACK_URL,
     client_id: X_CLIENT_ID,
     state: "state",
     response_type: "code",
