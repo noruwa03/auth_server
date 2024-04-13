@@ -1,6 +1,6 @@
 const { OAuth2Client } = require("google-auth-library");
 require("dotenv").config();
-const { CLIENT_ID, CLIENT_SECRET, APP_URL } = process.env;
+const { CLIENT_ID, CLIENT_SECRET, APP_URL, GOOGLE_CALLBACK_URL } = process.env;
 
 const googleAuthController = async (_, res) => {
   res.header(
